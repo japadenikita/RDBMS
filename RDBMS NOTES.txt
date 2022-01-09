@@ -1,0 +1,958 @@
+
+mysql> show schemas;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.02 sec)
+
+mysql> create database batch97;
+Query OK, 1 row affected (0.03 sec)
+
+mysql> use batch97;
+Database changed
+
+
+mysql> create table student(regno INTEGER , name VARCHAR(20), branch VARCHAR(20));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc student;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| regno  | int         | YES  |     | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| branch | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+
+mysql> insert into student values(1,'Ram','CSE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(1,'Hari','Mech');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into student values(1,'Pradeep','EEE');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(2,'Deepak','ETC');
+Query OK, 1 row affected (0.01 sec)
+
+
+mysql> select * from student;
++-------+---------+--------+
+| regno | name    | branch |
++-------+---------+--------+
+|     1 | Ram     | CSE    |
+|     1 | Hari    | Mech   |
+|     1 | Pradeep | EEE    |
+|     2 | Deepak  | ETC    |
++-------+---------+--------+
+4 rows in set (0.01 sec)
+
+
+mysql> SELECT regno FROM student WHERE name='Pradeep';
++-------+
+| regno |
++-------+
+|     1 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM student WHERE name='Pradeep';
++-------+---------+--------+
+| regno | name    | branch |
++-------+---------+--------+
+|     1 | Pradeep | EEE    |
++-------+---------+--------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT name,branch FROM student ;
++---------+--------+
+| name    | branch |
++---------+--------+
+| Ram     | CSE    |
+| Hari    | Mech   |
+| Pradeep | EEE    |
+| Deepak  | ETC    |
++---------+--------+
+4 rows in set (0.00 sec)
+
+
+mysql> SELECT COUNT(regno)FROM student;
++--------------+
+| COUNT(regno) |
++--------------+
+|            4 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*)FROM student;
++----------+
+| COUNT(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> ALTER TABLE student ADD address VARCHAR(20);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM student;
++-------+---------+--------+---------+
+| regno | name    | branch | address |
++-------+---------+--------+---------+
+|     1 | Ram     | CSE    | NULL    |
+|     1 | Hari    | Mech   | NULL    |
+|     1 | Pradeep | EEE    | NULL    |
+|     2 | Deepak  | ETC    | NULL    |
++-------+---------+--------+---------+
+4 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM student;
++-------+---------+--------+---------+
+| regno | name    | branch | address |
++-------+---------+--------+---------+
+|     1 | Ram     | CSE    | NULL    |
+|     1 | Hari    | Mech   | NULL    |
+|     1 | Pradeep | EEE    | NULL    |
+|     2 | Deepak  | ETC    | NULL    |
++-------+---------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM student WHERE name = 'Pradeep';
++-------+---------+--------+---------+
+| regno | name    | branch | address |
++-------+---------+--------+---------+
+|     1 | Pradeep | EEE    | NULL    |
++-------+---------+--------+---------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT COUNT(*) FROM student;
++----------+
+| COUNT(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT name,branch FROM student;
++---------+--------+
+| name    | branch |
++---------+--------+
+| Ram     | CSE    |
+| Hari    | Mech   |
+| Pradeep | EEE    |
+| Deepak  | ETC    |
++---------+--------+
+4 rows in set (0.00 sec)
+
+ 
+mysql> create table emp(id INTEGER,ename VARCHAR(20),job VARCHAR(20),hiredate VARCHAR(20),mgr VARCHAR(20),sal DOUBLE,COMM DOUBLE,deptno INTEGER);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT into emp VALUES(7369,'smith','clerk','1980-12-17',7902,1050,NULL,20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT into emp VALUES(7499,'allen','salesman','1981-02-20',7698,1600,300,30);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT into emp VALUES(7499,'ward','salesman','1981-02-22',7698,1250,500,30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT into emp VALUES(7566,'jones','manager','1981-04-02',7839,3225,NULL,20);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT into emp VALUES(7654,'martin','salesman','1981-09-28',7698,1250,1400,30);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT into emp VALUES(7698,'blake','manager','1981-05-01',7839,3100,NULL,30);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT into emp VALUES(7782,'clark','manager','1981-06-09',7839,2700,NULL,10);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT into emp VALUES(7788,'scott','analyst','1987-04-19',7566,3250,NULL,20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT into emp VALUES(7839,'king','president','1981-11-17',NULL,5250,NULL,10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT into emp VALUES(7844,'turner','salesman','1981-08-08',7698,1750,NULL,30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT into emp VALUES(7876,'adams','clerk','1987-05-23',7788,1350,NULL,20);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT into emp VALUES(7900,'james','clerk','1981-12-03',7698,1200,NULL,30);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT into emp VALUES(7902,'ford','analyst','1981-12-03',7566,3250,NULL,20);
+Query OK, 1 row affected (0.01 sec)
+
+
+
+
+
+mysql> desc emp;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int         | YES  |     | NULL    |       |
+| ename    | varchar(20) | YES  |     | NULL    |       |
+| job      | varchar(20) | YES  |     | NULL    |       |
+| hiredate | varchar(20) | YES  |     | NULL    |       |
+| mgr      | varchar(20) | YES  |     | NULL    |       |
+| sal      | double      | YES  |     | NULL    |       |
+| COMM     | double      | YES  |     | NULL    |       |
+| deptno   | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> SELECT * FROM emp;
++------+--------+-----------+------------+------+------+------+--------+
+| id   | ename  | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+-----------+------------+------+------+------+--------+
+| 7369 | smith  | clerk     | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7499 | allen  | salesman  | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7499 | ward   | salesman  | 1981-02-22 | 7698 | 1250 |  500 |     30 |
+| 7566 | jones  | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7654 | martin | salesman  | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
+| 7698 | blake  | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark  | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7788 | scott  | analyst   | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7839 | king   | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
+| 7844 | turner | salesman  | 1981-08-08 | 7698 | 1750 | NULL |     30 |
+| 7876 | adams  | clerk     | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk     | 1981-12-03 | 7698 | 1200 | NULL |     30 |
+| 7902 | ford   | analyst   | 1981-12-03 | 7566 | 3250 | NULL |     20 |
++------+--------+-----------+------------+------+------+------+--------+
+13 rows in set (0.01 sec)
+
+mysql> SELECT COUNT(*) FROM emp;
++----------+
+| COUNT(*) |
++----------+
+|       13 |
++----------+
+1 row in set (0.00 sec)
+
+Q-Select the employees in department 20.
+mysql> SELECT deptno FROM emp WHERE deptno = 20;
++--------+
+| deptno |
++--------+
+|     20 |
+|     20 |
+|     20 |
+|     20 |
+|     20 |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM emp WHERE deptno = 20;
++------+-------+---------+------------+------+------+------+--------+
+| id   | ename | job     | hiredate   | mgr  | sal  | COMM | deptno |
++------+-------+---------+------------+------+------+------+--------+
+| 7369 | smith | clerk   | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7566 | jones | manager | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7788 | scott | analyst | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7876 | adams | clerk   | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7902 | ford  | analyst | 1981-12-03 | 7566 | 3250 | NULL |     20 |
++------+-------+---------+------------+------+------+------+--------+
+5 rows in set (0.00 sec)
+
+Q-Select the employees in department 30
+mysql> SELECT * FROM emp WHERE deptno = 30;
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7499 | allen  | salesman | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7499 | ward   | salesman | 1981-02-22 | 7698 | 1250 |  500 |     30 |
+| 7654 | martin | salesman | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
+| 7698 | blake  | manager  | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7844 | turner | salesman | 1981-08-08 | 7698 | 1750 | NULL |     30 |
+| 7900 | james  | clerk    | 1981-12-03 | 7698 | 1200 | NULL |     30 |
++------+--------+----------+------------+------+------+------+--------+
+6 rows in set (0.00 sec)
+
+Q-List the names, numbers and departments of all clerks.
+mysql> SELECT ename,id,deptno FROM emp WHERE job = 'clerk';
++-------+------+--------+
+| ename | id   | deptno |
++-------+------+--------+
+| smith | 7369 |     20 |
+| adams | 7876 |     20 |
+| james | 7900 |     30 |
++-------+------+--------+
+3 rows in set (0.00 sec)
+
+Q-Find the department numbers and names of employees of all departments with deptno greater than 20.
+mysql> SELECT  deptno,ename FROM emp WHERE deptno >20;
++--------+--------+
+| deptno | ename  |
++--------+--------+
+|     30 | allen  |
+|     30 | ward   |
+|     30 | martin |
+|     30 | blake  |
+|     30 | turner |
+|     30 | james  |
++--------+--------+
+6 rows in set (0.00 sec)
+
+Q-Find employees whose commission is greater than their salaries.
+mysql> SELECT * FROM emp WHERE comm > sal;
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7654 | martin | salesman | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
++------+--------+----------+------------+------+------+------+--------+
+1 row in set (0.00 sec)
+
+Q-Find employees whose commission is greater than 60 % of their salaries.
+mysql> SELECT * FROM emp WHERE comm >60% sal;
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7499 | allen  | salesman | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7499 | ward   | salesman | 1981-02-22 | 7698 | 1250 |  500 |     30 |
+| 7654 | martin | salesman | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
++------+--------+----------+------------+------+------+------+--------+
+3 rows in set (0.00 sec)
+
+
+Q-List name, job and salary of all employees in department 20 who earn more than 2000/-.
+mysql> SELECT ename,job,sal FROM emp WHERE deptno 20 AND sal > 2000;
++-------+-----------+------+
+| ename | job       | sal  |
++-------+-----------+------+
+| blake | manager   | 3100 |
+| clark | manager   | 2700 |
+| king  | president | 5250 |
++-------+-----------+------+
+3 rows in set (0.00 sec)
+ 
+ Q-Find all salesmen in department 30 whose salary is greater than 1500/
+
+mysql> SELECT * FROM emp WHERE job IN ('salesman') AND deptno = 30 AND sal > 1500;
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7499 | allen  | salesman | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7844 | turner | salesman | 1981-08-08 | 7698 | 1750 | NULL |     30 |
++------+--------+----------+------------+------+------+------+--------+
+2 rows in set (0.00 sec)
+
+
+Q-Find all employees whose designation is either manager or president.
+)
+
+mysql> SELECT * FROM emp WHERE job IN ('manager','president');
++------+-------+-----------+------------+------+------+------+--------+
+| id   | ename | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+-------+-----------+------------+------+------+------+--------+
+| 7566 | jones | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7698 | blake | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7839 | king  | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
++------+-------+-----------+------------+------+------+------+--------+
+4 rows in set (0.00 sec)
+
+Q-Find all managers who are not in department 30.
+mysql> SELECT * FROM emp WHERE job = 'manager' AND NOT deptno = 30;
++------+-------+---------+------------+------+------+------+--------+
+| id   | ename | job     | hiredate   | mgr  | sal  | COMM | deptno |
++------+-------+---------+------------+------+------+------+--------+
+| 7566 | jones | manager | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7782 | clark | manager | 1981-06-09 | 7839 | 2700 | NULL |     10 |
++------+-------+---------+------------+------+------+------+--------+
+2 rows in set (0.00 sec)
+
+Q- Find all the details of managers and clerks in dept 10.
+mysql> SELECT * FROM emp WHERE job IN ('manager','clerk') AND deptno = 10;
++------+-------+---------+------------+------+------+------+--------+
+| id   | ename | job     | hiredate   | mgr  | sal  | COMM | deptno |
++------+-------+---------+------------+------+------+------+--------+
+| 7782 | clark | manager | 1981-06-09 | 7839 | 2700 | NULL |     10 |
++------+-------+---------+------------+------+------+------+--------+
+1 row in set (0.00 sec)
+
+
+Q-Find the details of all the managers (in any dept) and clerks in dept 20.
+mysql> SELECT * FROM emp WHERE job = 'manager' OR job = 'clerk' AND deptno = 20;
++------+-------+---------+------------+------+------+------+--------+
+| id   | ename | job     | hiredate   | mgr  | sal  | COMM | deptno |
++------+-------+---------+------------+------+------+------+--------+
+| 7369 | smith | clerk   | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7566 | jones | manager | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7698 | blake | manager | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark | manager | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7876 | adams | clerk   | 1987-05-23 | 7788 | 1350 | NULL |     20 |
++------+-------+---------+------------+------+------+------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM emp WHERE job = 'manager' OR (job = 'clerk' AND deptno = 20);
++------+-------+---------+------------+------+------+------+--------+
+| id   | ename | job     | hiredate   | mgr  | sal  | COMM | deptno |
++------+-------+---------+------------+------+------+------+--------+
+| 7369 | smith | clerk   | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7566 | jones | manager | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7698 | blake | manager | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark | manager | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7876 | adams | clerk   | 1987-05-23 | 7788 | 1350 | NULL |     20 |
++------+-------+---------+------------+------+------+------+--------+
+5 rows in set (0.00 sec)
+
+Find the names of anyone in dept. 20 who is neither manager nor clerk
+mysql> SELECT ename FROM emp WHERE deptno = 20 AND NOT job IN('manager','clerk');
++-------+
+| ename |
++-------+
+| scott |
+| ford  |
++-------+
+2 rows in set (0.00 sec)
+
+
+15)Find the names of employees who earn between 1200/- and 1400/-.
+SELECT * FROM emp WHERE sal BETWEEN 1200 AND 1400;
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7499 | ward   | salesman | 1981-02-22 | 7698 | 1250 |  500 |     30 |
+| 7654 | martin | salesman | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
+| 7876 | adams  | clerk    | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk    | 1981-12-03 | 7698 | 1200 | NULL |     30 |
++------+--------+----------+------------+------+------+------+--------+
+4 rows in set (0.00 sec)
+
+16)Find the employees who are clerks, analysts or salesmen.
+SELECT * FROM emp WHERE job IN('clerk','analyst','salesman');
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7369 | smith  | clerk    | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7499 | allen  | salesman | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7499 | ward   | salesman | 1981-02-22 | 7698 | 1250 |  500 |     30 |
+| 7654 | martin | salesman | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
+| 7788 | scott  | analyst  | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7844 | turner | salesman | 1981-08-08 | 7698 | 1750 | NULL |     30 |
+| 7876 | adams  | clerk    | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk    | 1981-12-03 | 7698 | 1200 | NULL |     30 |
+| 7902 | ford   | analyst  | 1981-12-03 | 7566 | 3250 | NULL |     20 |
++------+--------+----------+------------+------+------+------+--------+
+9 rows in set (0.00 sec)
+
+17)Find the employees who are NOT clerks, analysts or salesmen.
+ SELECT * FROM emp WHERE NOT job IN('clerk','analyst','salesman');
++------+-------+-----------+------------+------+------+------+--------+
+| id   | ename | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+-------+-----------+------------+------+------+------+--------+
+| 7566 | jones | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7698 | blake | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7839 | king  | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
++------+-------+-----------+------------+------+------+------+--------+
+4 rows in set (0.00 sec
+
+
+18)Find the employees who do not receive commission.
+SELECT * FROM emp WHERE COMM IS NULL;
++------+--------+-----------+------------+------+------+------+--------+
+| id   | ename  | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+-----------+------------+------+------+------+--------+
+| 7369 | smith  | clerk     | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7566 | jones  | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7698 | blake  | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark  | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7788 | scott  | analyst   | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7839 | king   | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
+| 7844 | turner | salesman  | 1981-08-08 | 7698 | 1750 | NULL |     30 |
+| 7876 | adams  | clerk     | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk     | 1981-12-03 | 7698 | 1200 | NULL |     30 |
+| 7902 | ford   | analyst   | 1981-12-03 | 7566 | 3250 | NULL |     20 |
++------+--------+-----------+------------+------+------+------+--------+
+
+
+19)Find the different jobs of employees receiving commission.
+ SELECT * FROM emp WHERE NOT COMM IS NULL;
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7499 | allen  | salesman | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7499 | ward   | salesman | 1981-02-22 | 7698 | 1250 |  500 |     30 |
+| 7654 | martin | salesman | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
++------+--------+----------+------------+------+------+------+--------+
+
+
+20)Find the employees who do not receive commission or whose commission is less than 100/-.
+SELECT * FROM emp WHERE COMM IS NULL OR COMM <100;
++------+--------+-----------+------------+------+------+------+--------+
+| id   | ename  | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+-----------+------------+------+------+------+--------+
+| 7369 | smith  | clerk     | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7566 | jones  | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7698 | blake  | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark  | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7788 | scott  | analyst   | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7839 | king   | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
+| 7844 | turner | salesman  | 1981-08-08 | 7698 | 1750 | NULL |     30 |
+| 7876 | adams  | clerk     | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk     | 1981-12-03 | 7698 | 1200 | NULL |     30 |
+| 7902 | ford   | analyst   | 1981-12-03 | 7566 | 3250 | NULL |     20 |
++------+--------+-----------+------------+------+------+------+--------+
+
+
+21)If all the employees not receiving commission is entitles to a bonus of Rs.
+ 250/- show the net earnings of all the employees
+ SELECT SUM(sal + 250) AS total_earning FROM emp WHERE COMM IS NULL;
++---------------+
+| total_earning |
++---------------+
+|         28625 |
++---------------+
+
+Find all the employees whose name begins with ‘M’
+SELECT * FROM emp WHERE ename LIKE 'M%';
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7654 | martin | salesman | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
++------+--------+----------+------------+------+------+------+--------+
+
+Find all the employees whose names contain the letter ‘M’ in any case.
+ SELECT * FROM emp WHERE ename LIKE '%M%';
++------+--------+----------+------------+------+------+------+--------+
+| id   | ename  | job      | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+----------+------------+------+------+------+--------+
+| 7369 | smith  | clerk    | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7654 | martin | salesman | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
+| 7876 | adams  | clerk    | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk    | 1981-12-03 | 7698 | 1200 | NULL |     30 |
++------+--------+----------+------------+------+------+------+--------+
+
+Find all the employees whose names are upto 15 character long and have
+letter ‘R’ as 3rd character of their names.
+ SELECT ename FROM emp WHERE ename LIKE '__r%';
++--------+
+| ename  |
++--------+
+| ward   |
+| martin |
+| turner |
+| ford   |
++--------+
+
+Find all the employees who were hired in the month of February (of any year).
+SELECT ename,hiredate FROM emp WHERE MONTH(hiredate) = 2;
++-------+------------+
+| ename | hiredate   |
++-------+------------+
+| allen | 1981-02-20 |
+| ward  | 1981-02-22 |
++-------+------------+
+
+Find all the employees who were hired on last day of the month
+ELECT ename,hiredate FROM emp WHERE DAY(hiredate) = 30;
+Empty set (0.00 sec)
+
+Find all the employees who were hired more than 2 years ago.
+SELECT * FROM emp WHERE (DATEDIFF(CURDATE(), HIREDATE) > 730);
++------+--------+-----------+------------+------+------+------+--------+
+| id   | ename  | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+-----------+------------+------+------+------+--------+
+| 7369 | smith  | clerk     | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7499 | allen  | salesman  | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7499 | ward   | salesman  | 1981-02-22 | 7698 | 1250 |  500 |     30 |
+| 7566 | jones  | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7654 | martin | salesman  | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
+| 7698 | blake  | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark  | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7788 | scott  | analyst   | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7839 | king   | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
+| 7844 | turner | salesman  | 1981-08-08 | 7698 | 1750 | NULL |     30 |
+| 7876 | adams  | clerk     | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk     | 1981-12-03 | 7698 | 1200 | NULL |     30 |
+| 7902 | ford   | analyst   | 1981-12-03 | 7566 | 3250 | NULL |     20 |
++------+--------+-----------+------------+------+------+------+--------+
+13 rows in set (0.00 sec)
+
+
+Q-Find the managers hired in the year 2003.
+SELECT * FROM emp WHERE hiredate BETWEEN '2003-01-01' AND '2003-12-30';
+Empty set (0.00 sec)
+
+
+Q-Display the names and jobs of all the employees separated by a space.
+SELECT CONCAT(ename , ' ', job ) AS nameandjob FROM emps;
++-----------------+
+| nameandjob      |
++-----------------+
+| smith clerk     |
+| allen salesman  |
+| ward salesman   |
+| jones manager   |
+| martin salesman |
+| blake manager   |
+| clark manager   |
+| scott analyst   |
+| king president  |
+| turner salesman |
+| adams clerk     |
+| james clerk     |
+| ford analyst    |
++-----------------+
+
+
+Q-Display the names of all the employees right aligning them to 15 characters.
+SELECT CONCAT(SPACE(15), ename) AS rightalign FROM emps;
++-----------------------+
+| rightalign            |
++-----------------------+
+|                smith  |
+|                allen  |
+|                ward   |
+|                jones  |
+|                martin |
+|                blake  |
+|                clark  |
+|                scott  |
+|                king   |
+|                turner |
+|                adams  |
+|                james  |
+|                ford   |
++-----------------------+
+Q- Display the names of all the employees padding them to the right up to 15 characters with ‘*’.
+SELECT RIGHT('*' + 'ename',4) as rightpadding FROM emps;
++--------------+
+| rightpadding |
++--------------+
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
+| 0            |
++--------------+
+
+
+Q-Display the names of all the employees without any leading ‘A’
+       SELECT *,
+    -> LEAD (ename,1) OVER (ORDER BY ename) AS empname
+    -> FROM emps;
++------+--------+-----------+------------+------+------+------+--------+---------+
+| id   | ename  | job       | hiredate   | mgr  | sal  | COMM | deptno | empname |
++------+--------+-----------+------------+------+------+------+--------+---------+
+| 7876 | adams  | clerk     | 1987-05-23 | 7788 | 1350 | NULL |     20 | allen   |
+| 7499 | allen  | salesman  | 1981-02-20 | 7698 | 1600 |  300 |     30 | blake   |
+| 7698 | blake  | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 | clark   |
+| 7782 | clark  | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 | ford    |
+| 7902 | ford   | analyst   | 1981-12-03 | 7566 | 3250 | NULL |     20 | james   |
+| 7900 | james  | clerk     | 1981-12-03 | 7698 | 1200 | NULL |     30 | jones   |
+| 7566 | jones  | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 | king    |
+| 7839 | king   | president | 1981-11-17 | NULL | 5250 | NULL |     10 | martin  |
+| 7654 | martin | salesman  | 1981-09-28 | 7698 | 1250 | 1400 |     30 | scott   |
+| 7788 | scott  | analyst   | 1987-04-19 | 7566 | 3250 | NULL |     20 | smith   |
+| 7369 | smith  | clerk     | 1980-12-17 | 7902 | 1050 | NULL |     20 | turner  |
+| 7844 | turner | salesman  | 1981-08-08 | 7698 | 1750 | NULL |     30 | ward    |
+| 7499 | ward   | salesman  | 1981-02-22 | 7698 | 1250 |  500 |     30 | NULL    |
++------+--------+-----------+------------+------+------+------+--------+---------+
+
+
+SELECT NOT TRIM('A' FROM 'ename') AS result;
++--------+
+| result |
++--------+
+|      1 |
++--------+
+
+Display the names of all the employees and position where the string ‘AR’ occurs in the name.
+SELECT ename, LOCATE('AR',ename) FROM emps;
++--------+--------------------+
+| ename  | LOCATE('AR',ename) |
++--------+--------------------+
+| smith  |                  0 |
+| allen  |                  0 |
+| ward   |                  2 |
+| jones  |                  0 |
+| martin |                  2 |
+| blake  |                  0 |
+| clark  |                  3 |
+| scott  |                  0 |
+| king   |                  0 |
+| turner |                  0 |
+| adams  |                  0 |
+| james  |                  0 |
+| ford   |                  0 |
++--------+--------------------+
+
+
+
+Display the names of all the employees replacing ‘A’ with ‘a’.
+SELECT ename, REPLACE (ename,'A','a') FROM emps;
++--------+-------------------------+
+| ename  | REPLACE (ename,'A','a') |
++--------+-------------------------+
+| smith  | smith                   |
+| allen  | allen                   |
+| ward   | ward                    |
+| jones  | jones                   |
+| martin | martin                  |
+| blake  | blake                   |
+| clark  | clark                   |
+| scott  | scott                   |
+| king   | king                    |
+| turner | turner                  |
+| adams  | adams                   |
+| james  | james                   |
+| ford   | ford                    |
++--------+-------------------------+
+
+ SELECT ename, REPLACE (ename,'a','A') FROM emps;
++--------+-------------------------+
+| ename  | REPLACE (ename,'a','A') |
++--------+-------------------------+
+| smith  | smith                   |
+| allen  | Allen                   |
+| ward   | wArd                    |
+| jones  | jones                   |
+| martin | mArtin                  |
+| blake  | blAke                   |
+| clark  | clArk                   |
+| scott  | scott                   |
+| king   | king                    |
+| turner | turner                  |
+| adams  | AdAms                   |
+| james  | jAmes                   |
+| ford   | ford                    |
++--------+-------------------------+
+
+Show the first 3 and last 3 characters of the names of all the employees.
+SELECT SUBSTRING(ename,1,3) FROM emps;
++----------------------+
+| SUBSTRING(ename,1,3) |
++----------------------+
+| smi                  |
+| all                  |
+| war                  |
+| jon                  |
+| mar                  |
+| bla                  |
+| cla                  |
+| sco                  |
+| kin                  |
+| tur                  |
+| ada                  |
+| jam                  |
+| for                  |
++----------------------+
+
+SELECT SUBSTRING(ename,3,3) FROM emps;
++----------------------+
+| SUBSTRING(ename,3,3) |
++----------------------+
+| ith                  |
+| len                  |
+| rd                   |
+| nes                  |
+| rti                  |
+| ake                  |
+| ark                  |
+| ott                  |
+| ng                   |
+| rne                  |
+| ams                  |
+| mes                  |
+| rd                   |
++----------------------+
+
+
+Show the names of all the employees and date on which they completed 3 years of service.
+SELECT * FROM emps WHERE (DATEDIFF(CURDATE(), hiredate) > 1125);
++------+--------+-----------+------------+------+------+------+--------+
+| id   | ename  | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+-----------+------------+------+------+------+--------+
+| 7369 | smith  | clerk     | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7499 | allen  | salesman  | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7499 | ward   | salesman  | 1981-02-22 | 7698 | 1250 |  500 |     30 |
+| 7566 | jones  | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7654 | martin | salesman  | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
+| 7698 | blake  | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark  | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7788 | scott  | analyst   | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7839 | king   | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
+| 7844 | turner | salesman  | 1981-08-08 | 7698 | 1750 | NULL |     30 |
+| 7876 | adams  | clerk     | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk     | 1981-12-03 | 7698 | 1200 | NULL |     30 |
+| 7902 | ford   | analyst   | 1981-12-03 | 7566 | 3250 | NULL |     20 |
++------+--------+-----------+------------+------+------+------+--------+
+
+
+ Show the salary of all the employees , rounding it to the nearest Rs. 1000/-.
+ SELECT * FROM emps WHERE FLOOR(sal) = 1000;
+Empty set (0.01 sec)
+
+ For each employee, display the no. of months passed since the employee joined the company.
+SELECT FLOOR (DATEDIFF(CURDATE(), hiredate)/30) FROM emps;
++------------------------------------------+
+| FLOOR (DATEDIFF(CURDATE(), hiredate)/30) |
++------------------------------------------+
+|                                      499 |
+|                                      497 |
+|                                      497 |
+|                                      496 |
+|                                      490 |
+|                                      495 |
+|                                      494 |
+|                                      422 |
+|                                      488 |
+|                                      492 |
+|                                      421 |
+|                                      488 |
+|                                      488 |
++------------------------------------------+
+
+
+Q- Display the details of all the employees sorted on the names.
+SELECT * FROM emps ORDER BY ename;
++------+--------+-----------+------------+------+------+------+--------+
+| id   | ename  | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+-----------+------------+------+------+------+--------+
+| 7876 | adams  | clerk     | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7499 | allen  | salesman  | 1981-02-20 | 7698 | 1600 |  300 |     30 |
+| 7698 | blake  | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark  | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7902 | ford   | analyst   | 1981-12-03 | 7566 | 3250 | NULL |     20 |
+| 7900 | james  | clerk     | 1981-12-03 | 7698 | 1200 | NULL |     30 |
+| 7566 | jones  | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7839 | king   | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
+| 7654 | martin | salesman  | 1981-09-28 | 7698 | 1250 | 1400 |     30 |
+| 7788 | scott  | analyst   | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7369 | smith  | clerk     | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7844 | turner | salesman  | 1981-08-08 | 7698 | 1750 | NULL |     30 |
+| 7499 | ward   | salesman  | 1981-02-22 | 7698 | 1250 |  500 |     30 |
++------+--------+-----------+------------+------+------+------+--------+
+
+Show the salary of all the employees , ignoring the fraction less than Rs. 1000/-.
+mysql> SELECT * FROM emps WHERE FLOOR(sal) < 1000;
+Empty set (0.00 sec)
+
+
+Display the names, jobs and salaries of employees, sorting on job and salary.
+SELECT ename,job,sal FROM emps ORDER BY job,sal;
++--------+-----------+------+
+| ename  | job       | sal  |
++--------+-----------+------+
+| scott  | analyst   | 3250 |
+| ford   | analyst   | 3250 |
+| smith  | clerk     | 1050 |
+| james  | clerk     | 1200 |
+| adams  | clerk     | 1350 |
+| clark  | manager   | 2700 |
+| blake  | manager   | 3100 |
+| jones  | manager   | 3225 |
+| king   | president | 5250 |
+| ward   | salesman  | 1250 |
+| martin | salesman  | 1250 |
+| allen  | salesman  | 1600 |
+| turner | salesman  | 1750 |
++--------+-----------+------+
+
+Display the names, jobs and salaries of employees, sorting on descending order of job 
+SELECT ename,job,sal FROM emps ORDER BY job DESC;
++--------+-----------+------+
+| ename  | job       | sal  |
++--------+-----------+------+
+| allen  | salesman  | 1600 |
+| ward   | salesman  | 1250 |
+| martin | salesman  | 1250 |
+| turner | salesman  | 1750 |
+| king   | president | 5250 |
+| jones  | manager   | 3225 |
+| blake  | manager   | 3100 |
+| clark  | manager   | 2700 |
+| smith  | clerk     | 1050 |
+| adams  | clerk     | 1350 |
+| james  | clerk     | 1200 |
+| scott  | analyst   | 3250 |
+| ford   | analyst   | 3250 |
++--------+-----------+------+
+
+
+List the employee names, department names and salary for those employees who have completed 1 year of service.
+SELECT ename,job,sal FROM emps WHERE (DATEDIFF(CURDATE(), hiredate) > 365);
++--------+-----------+------+
+| ename  | job       | sal  |
++--------+-----------+------+
+| smith  | clerk     | 1050 |
+| allen  | salesman  | 1600 |
+| ward   | salesman  | 1250 |
+| jones  | manager   | 3225 |
+| martin | salesman  | 1250 |
+| blake  | manager   | 3100 |
+| clark  | manager   | 2700 |
+| scott  | analyst   | 3250 |
+| king   | president | 5250 |
+| turner | salesman  | 1750 |
+| adams  | clerk     | 1350 |
+| james  | clerk     | 1200 |
+| ford   | analyst   | 3250 |
++--------+-----------+------+
+
+
+
+List the employee names, department names and salary for those employees who are earning 0
+ commission or commission is null. Sort your output in the order of department name.
+SELECT * FROM emps WHERE COMM IS NULL ORDER BY job;
++------+--------+-----------+------------+------+------+------+--------+
+| id   | ename  | job       | hiredate   | mgr  | sal  | COMM | deptno |
++------+--------+-----------+------------+------+------+------+--------+
+| 7788 | scott  | analyst   | 1987-04-19 | 7566 | 3250 | NULL |     20 |
+| 7902 | ford   | analyst   | 1981-12-03 | 7566 | 3250 | NULL |     20 |
+| 7369 | smith  | clerk     | 1980-12-17 | 7902 | 1050 | NULL |     20 |
+| 7876 | adams  | clerk     | 1987-05-23 | 7788 | 1350 | NULL |     20 |
+| 7900 | james  | clerk     | 1981-12-03 | 7698 | 1200 | NULL |     30 |
+| 7566 | jones  | manager   | 1981-04-02 | 7839 | 3225 | NULL |     20 |
+| 7698 | blake  | manager   | 1981-05-01 | 7839 | 3100 | NULL |     30 |
+| 7782 | clark  | manager   | 1981-06-09 | 7839 | 2700 | NULL |     10 |
+| 7839 | king   | president | 1981-11-17 | NULL | 5250 | NULL |     10 |
+| 7844 | turner | salesman  | 1981-08-08 | 7698 | 1750 | NULL |     30 |
++------+--------+-----------+------------+------+------+------+--------+
+
+ List the employee names, department names and hiredate for those employees who have joined in 2003 . Sort your output in the order of joining date.
+SELECT ename,job,hiredate FROM emp WHERE YEAR(hiredate) = 2003 ORDER BY hiredate;
+Empty set (0.01 sec)
+
+SELECT ename,job,hiredate FROM emps WHERE YEAR(hiredate) = 1981 ORDER BY hiredate;
++--------+-----------+------------+
+| ename  | job       | hiredate   |
++--------+-----------+------------+
+| allen  | salesman  | 1981-02-20 |
+| ward   | salesman  | 1981-02-22 |
+| jones  | manager   | 1981-04-02 |
+| blake  | manager   | 1981-05-01 |
+| clark  | manager   | 1981-06-09 |
+| turner | salesman  | 1981-08-08 |
+| martin | salesman  | 1981-09-28 |
+| king   | president | 1981-11-17 |
+| james  | clerk     | 1981-12-03 |
+| ford   | analyst   | 1981-12-03 |
++--------+-----------+------------+
